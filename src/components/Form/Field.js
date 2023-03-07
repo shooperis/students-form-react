@@ -37,8 +37,11 @@ const Field = ({field, fieldValue, validationMsg, onSetFieldValue}) => {
         <label htmlFor={field.id}>{field.title}</label>
         <div className="input-range">
           {React.createElement('input', fieldOptions)}
-          <output>{fieldValue}</output>
+          <output className={validationMsg ? 'error' : ''}>{fieldValue}</output>
         </div>
+        {validationMsg && (
+          <span className="error-text">{validationMsg}</span>
+        )}
       </div>
     );
   }
@@ -62,10 +65,14 @@ const Field = ({field, fieldValue, validationMsg, onSetFieldValue}) => {
                 checked={isChecked}
                 onChange={event => {onSetFieldValue(event, field.type)}}
               />
-              <label htmlFor={radioId}>{value}</label>
+              <label htmlFor={radioId} className={validationMsg ? 'error' : ''}>{value}</label>
             </div>
           )
         })}
+
+        {validationMsg && (
+          <span className="error-text">{validationMsg}</span>
+        )}
       </fieldset>      
     );
   }
@@ -92,10 +99,14 @@ const Field = ({field, fieldValue, validationMsg, onSetFieldValue}) => {
                 checked={isChecked}
                 onChange={event => {onSetFieldValue(event, field.type)}}
               />
-              <label htmlFor={checkboxId}>{value}</label>
+              <label htmlFor={checkboxId} className={validationMsg ? 'error' : ''}>{value}</label>
             </div>
           )
         })}
+
+        {validationMsg && (
+          <span className="error-text">{validationMsg}</span>
+        )}
       </fieldset>      
     );
   }
