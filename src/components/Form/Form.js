@@ -65,7 +65,7 @@ const Form = ({title, text, image, imageAlt, fields, onStudentCreated, studentTo
 
           if (validationOptionId === 'maxLength' && fieldValue.length > validationOptionValue) {
             validationStatus = false;
-            messages[`${fieldId}`] = `This field should be not more than ${validationOptionValue} numbers`;
+            messages[`${fieldId}`] = `This field should be not more than ${validationOptionValue} characters`;
           }
 
           if (validationOptionId === 'minLength' && fieldValue.length < validationOptionValue) {
