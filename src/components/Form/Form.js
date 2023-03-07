@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { v4 as uuid } from 'uuid';
 import './Form.css';
 
 const Form = ({title, text, image, imageAlt, fields, onStudentCreated, studentToEditData, onStudentEdited}) => {
@@ -140,7 +141,7 @@ const Form = ({title, text, image, imageAlt, fields, onStudentCreated, studentTo
       onStudentEdited(editedStudent);
     } else {
       const newStudent = {
-        id: Math.random(),
+        id: uuid(),
         createdAt: new Date().toISOString(),
         data: fieldsValues
       }
