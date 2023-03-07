@@ -109,7 +109,7 @@
 .students-list-wrapper #students-list {
   display: flex;
   flex-wrap: wrap;
-  justify-content: start;
+  justify-content: flex-start;
   gap: 35px;
 }
 .students-list-wrapper #students-list .student-item {

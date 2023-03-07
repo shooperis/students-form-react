@@ -135,7 +135,16 @@ const Form = ({title, text, image, imageAlt, fields, onStudentCreated, studentTo
     
           <form id="students-form" onSubmit={onSubmitFormHandler} onReset={onResetFormHandler} noValidate>
             <div className="student-info">
-              {fields.map(field => <Field field={field} fieldValue={fieldsValues[`${field.id}`].value} validationMsg={fieldsValidationMessages[`${field.id}`]} onSetFieldValue={onSetFieldValueHandler} />)}
+              {fields.map(field => {
+                const validationMessage = fieldsValidationMessages[`${field.id}`];
+                return <Field
+                  key={field.id}
+                  field={field}
+                  fieldValue={fieldsValues[`${field.id}`].value}
+                  validationMsg={validationMessage ? validationMessage : ''}
+                  onSetFieldValue={onSetFieldValueHandler}
+                />}
+              )}
             </div>
             <button className="submit-button btn big-btn" type="submit">Save</button>
             <button className="reset-button btn secondary-btn big-btn" type="reset">Reset</button>
