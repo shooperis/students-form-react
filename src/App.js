@@ -57,7 +57,7 @@ function App() {
             defaultValue: "",
             validation: {
               minLength: 3,
-              require: true
+              required: true
             }
           },
           {
@@ -67,7 +67,7 @@ function App() {
             defaultValue: "",
             validation: {
               minLength: 3,
-              require: true
+              required: true
             }
           },
           {
@@ -82,7 +82,7 @@ function App() {
             validation: {
               minNumb: 1,
               maxNumb: 120,
-              require: true
+              required: true
             }
           },
           {
@@ -94,7 +94,7 @@ function App() {
             validation: {
               minLength: 9,
               maxLength: 12,
-              require: true
+              required: true
             }
           },
           {
@@ -106,7 +106,7 @@ function App() {
             validation: {
               minLength: 8,
               email: true,
-              require: true
+              required: true
             }
           },
           {

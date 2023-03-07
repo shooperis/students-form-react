@@ -73,7 +73,7 @@ const Form = ({title, text, image, imageAlt, fields, onStudentCreated, studentTo
             messages[`${fieldId}`] = `This field should be at least ${validationOptionValue} characters`;
           }
 
-          if (validationOptionId === 'require' && validationOptionValue === true && !fieldValue) {
+          if (validationOptionId === 'required' && validationOptionValue === true && !fieldValue) {
             validationStatus = false;
             messages[`${fieldId}`] = 'This field is required';
           }
