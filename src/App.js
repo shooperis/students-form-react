@@ -54,13 +54,21 @@ function App() {
             type: "text",
             id: "first-name",
             title: "First name",
-            defaultValue: ""
+            defaultValue: "",
+            validation: {
+              minLength: 3,
+              require: true
+            }
           },
           {
             type: "text",
             id: "last-name",
             title: "Last name",
-            defaultValue: ""
+            defaultValue: "",
+            validation: {
+              minLength: 3,
+              require: true
+            }
           },
           {
             type: "number",
@@ -70,6 +78,11 @@ function App() {
             params: {
               min: -10,
               max: 200
+            },
+            validation: {
+              minNumb: 1,
+              maxNumb: 120,
+              require: true
             }
           },
           {
@@ -77,14 +90,24 @@ function App() {
             id: "phone",
             title: "Phone",
             defaultValue: "",
-            personal: true
+            personal: true,
+            validation: {
+              minLength: 9,
+              maxLength: 12,
+              require: true
+            }
           },
           {
             type: "email",
             id: "email",
             title: "Email",
             defaultValue: "",
-            personal: true
+            personal: true,
+            validation: {
+              minLength: 8,
+              email: true,
+              require: true
+            }
           },
           {
             type: "range",

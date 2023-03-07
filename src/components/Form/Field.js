@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Field = ({field, fieldValue, onSetFieldValue}) => {
+const Field = ({field, fieldValue, validationMsg, onSetFieldValue}) => {
   const fieldOptions = {
     name: field.id, 
     id: field.id,
@@ -15,14 +15,18 @@ const Field = ({field, fieldValue, onSetFieldValue}) => {
     });
   }
 
+  if (validationMsg) {
+    fieldOptions.className = 'error';
+  }
+
   if (field.type === 'text' || field.type === 'number' || field.type === 'tel' || field.type === 'email') {
     return (
       <div key={field.id} className="input-group">
         <label htmlFor={field.id}>{field.title}</label>
         {React.createElement('input', fieldOptions)}
-        {/* {validateForm && fieldValue.length < 3 && (
-          <span className="error-text">This field is required</span>
-        )} */}
+        {validationMsg && (
+          <span className="error-text">{validationMsg}</span>
+        )}
       </div>
     );
   }
