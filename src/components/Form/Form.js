@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './Form.css';
 
-const Form = ({title, text, image, imageAlt, fields, onStudentCreated, studentToEditData, onUnsetStudentToEdit}) => {
+const Form = ({title, text, image, imageAlt, fields, onStudentCreated, studentToEditData, onStudentEdited}) => {
   const fieldsDefaultValues = {};
   fields.forEach(field => {
     fieldsDefaultValues[`${field.id}`] = {
@@ -137,7 +137,7 @@ const Form = ({title, text, image, imageAlt, fields, onStudentCreated, studentTo
       const editedStudent = studentToEditData;
       editedStudent.data = fieldsValues;
 
-      onUnsetStudentToEdit();
+      onStudentEdited(editedStudent);
     } else {
       const newStudent = {
         id: Math.random(),
@@ -155,7 +155,7 @@ const Form = ({title, text, image, imageAlt, fields, onStudentCreated, studentTo
     setFieldsValues(fieldsDefaultValues);
     
     if (studentToEditData.id) {
-      onUnsetStudentToEdit();
+      onStudentEdited();
     }
   }
 

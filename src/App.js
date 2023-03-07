@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Form from './components/Form/Form.js';
 import List from './components/List/List.js';
 import formImage from './assets/images/form-image.svg';
 
 function App() {
-  const [studentsData, setStudentsData] = useState([]);
+  const studentsDataLS = JSON.parse(localStorage.getItem("studentsData"));
+  const [studentsData, setStudentsData] = useState(studentsDataLS ? studentsDataLS : []);
   const [studentToEditData, setStudentToEditData] = useState({});
 
   const addNewStudent = newStudent => {
@@ -19,9 +20,27 @@ function App() {
     setStudentToEditData(student);
   };
 
-  const unsetEditedStudent = () => {
+  const editStudent = (editedStudent) => {
+    if (editedStudent) {
+      setStudentsData(prevState => {
+        const updatedStudentsData = prevState.map(student => {
+          if (student.id === editedStudent.id) {
+            return { ...student, data: editedStudent.data };
+          }
+  
+          return student;
+        })
+  
+        return updatedStudentsData;
+      })
+    }
+  
     setStudentToEditData({});
   };
+
+  useEffect(() => {
+    localStorage.setItem("studentsData", JSON.stringify(studentsData));
+  }, [studentsData]);
 
   return (
     <div className="wrapper">
@@ -93,7 +112,7 @@ function App() {
         ]}
         onStudentCreated={addNewStudent}
         studentToEditData={studentToEditData}
-        onUnsetStudentToEdit={unsetEditedStudent}
+        onStudentEdited={editStudent}
       />
       <List 
         students={studentsData}
