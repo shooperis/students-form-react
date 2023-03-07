@@ -6,13 +6,13 @@ import './Form.css';
 const Form = ({title, text, image, imageAlt, fields, onStudentCreated, studentToEditData, onStudentEdited}) => {
   const fieldsDefaultValues = {};
   fields.forEach(field => {
-    fieldsDefaultValues[`${field.id}`] = {
+    fieldsDefaultValues[field.id] = {
       title: field.title,
       value: field.defaultValue ? field.defaultValue : ''
     };
 
     if (field.personal) {
-      fieldsDefaultValues[`${field.id}`].personal = true;
+      fieldsDefaultValues[field.id].personal = true;
     }
   });
 
@@ -28,8 +28,8 @@ const Form = ({title, text, image, imageAlt, fields, onStudentCreated, studentTo
     }
 
     setFieldsValues(prevState => {
-      prevState[`${event.target.name}`].value = value;
-      return Object.assign({}, prevState);
+      prevState[event.target.name].value = value;
+      return {...prevState};
     });
   };
 
@@ -42,7 +42,7 @@ const Form = ({title, text, image, imageAlt, fields, onStudentCreated, studentTo
 
       if (fieldValidationOptions) {
         const fieldId = field.id;
-        const fieldValue = fieldsToValidate[`${fieldId}`].value;
+        const fieldValue = fieldsToValidate[fieldId].value;
 
         Object.keys(fieldValidationOptions).forEach(key => {
           let validationOptionId = key;
@@ -50,32 +50,32 @@ const Form = ({title, text, image, imageAlt, fields, onStudentCreated, studentTo
 
           if (validationOptionId === 'email' && validationOptionValue === true && (!fieldValue.includes('@') || !fieldValue.includes('.'))) {
             validationStatus = false;
-            messages[`${fieldId}`] = 'This field should @ and . characters';
+            messages[fieldId] = 'This field should @ and . characters';
           }
 
           if (validationOptionId === 'maxNumb' && Number(fieldValue) > validationOptionValue) {
             validationStatus = false;
-            messages[`${fieldId}`] = `This field can't be more than ${validationOptionValue}`;
+            messages[fieldId] = `This field can't be more than ${validationOptionValue}`;
           }
 
           if (validationOptionId === 'minNumb' && Number(fieldValue) < validationOptionValue) {
             validationStatus = false;
-            messages[`${fieldId}`] = `This field can't be less than ${validationOptionValue}`;
+            messages[fieldId] = `This field can't be less than ${validationOptionValue}`;
           }
 
           if (validationOptionId === 'maxLength' && fieldValue.length > validationOptionValue) {
             validationStatus = false;
-            messages[`${fieldId}`] = `This field should be not more than ${validationOptionValue} characters`;
+            messages[fieldId] = `This field should be not more than ${validationOptionValue} characters`;
           }
 
           if (validationOptionId === 'minLength' && fieldValue.length < validationOptionValue) {
             validationStatus = false;
-            messages[`${fieldId}`] = `This field should be at least ${validationOptionValue} characters`;
+            messages[fieldId] = `This field should be at least ${validationOptionValue} characters`;
           }
 
           if (validationOptionId === 'required' && validationOptionValue === true && !fieldValue) {
             validationStatus = false;
-            messages[`${fieldId}`] = 'This field is required';
+            messages[fieldId] = 'This field is required';
           }
         });
       }
@@ -136,11 +136,11 @@ const Form = ({title, text, image, imageAlt, fields, onStudentCreated, studentTo
           <form id="students-form" onSubmit={onSubmitFormHandler} onReset={onResetFormHandler} noValidate>
             <div className="student-info">
               {fields.map(field => {
-                const validationMessage = fieldsValidationMessages[`${field.id}`];
+                const validationMessage = fieldsValidationMessages[field.id];
                 return <Field
                   key={field.id}
                   field={field}
-                  fieldValue={fieldsValues[`${field.id}`].value}
+                  fieldValue={fieldsValues[field.id].value}
                   validationMsg={validationMessage ? validationMessage : ''}
                   onSetFieldValue={onSetFieldValueHandler}
                 />}

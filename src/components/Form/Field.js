@@ -12,7 +12,7 @@ const Field = ({field, fieldValue, validationMsg, onSetFieldValue}) => {
 
   if (field.params) {
     Object.keys(field.params).forEach(key => {
-      fieldOptions[`${key}`] = field.params[key];
+      fieldOptions[key] = field.params[key];
     });
   }
 
