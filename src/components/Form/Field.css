@@ -1,0 +1,107 @@
+.form-wrapper .form-container .student-info .input-group {
+  border-bottom: 1px solid #e6edf1;
+  padding: 15px 15px;
+  background: #edf2f5;
+}
+
+.form-wrapper .form-container .student-info .input-group:first-child {
+  border-top-left-radius: 7px;
+  border-top-right-radius: 7px;
+}
+
+.form-wrapper .form-container .student-info .input-group + .input-group:last-of-type {
+  border-bottom-left-radius: 7px;
+  border-bottom-right-radius: 7px;
+}
+
+.form-wrapper .form-container .student-info .input-group label {
+  display: block;
+  color: #b3b3b3;
+  font-size: 13px;
+  margin-bottom: 5px;
+}
+.form-wrapper .form-container .student-info .input-group input {
+  width: 100%;
+  border: none;
+  padding: 5px 10px;
+  font-size: 20px;
+  color: #495057;
+  border: 1px solid #e6edf1;
+  border-radius: 3px;
+}
+.form-wrapper .form-container .student-info .input-group input.error {
+  border-color: #dc3545;
+}
+.form-wrapper .form-container .student-info .input-group .input-range {
+  display: flex;
+}
+.form-wrapper .form-container .student-info .input-group .input-range output {
+  color: #495057;
+  padding-left: 8px;
+  padding-top: 5px;
+}
+.form-wrapper .form-container .student-info .input-group .input-range output.error {
+  color: #dc3545;
+}
+.form-wrapper .form-container .student-info .input-group .error-text {
+  color: #dc3545;
+  font-size: 13px;
+  display: block;
+  margin-top: 3px;
+}
+.form-wrapper .form-container .student-info .input-group:last-child {
+  border-bottom: none;
+}
+.form-wrapper .form-container .student-info fieldset {
+  color: #495057;
+  background: #edf2f5;
+  border: none;
+  border-radius: 7px;
+  margin: 15px 0px 0px;
+  padding: 15px 15px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.form-wrapper .form-container .student-info fieldset legend {
+  color: #b3b3b3;
+  font-size: 13px;
+  padding: 0px;
+}
+/* NEED FIX THIS */
+.form-wrapper .form-container .student-info fieldset .input-group {
+  border: unset;
+  padding: unset;
+  background: unset;
+}
+.form-wrapper .form-container .student-info fieldset .input-group input {
+  width: unset;
+  border: unset;
+  padding: unset;
+  font-size: unset;
+  color: unset;
+  border-radius: unset
+}
+.form-wrapper .form-container .student-info fieldset .input-group label {
+  color: #212529;
+  display: unset;
+  font-size: unset;
+  margin-bottom: unset
+}
+.form-wrapper .form-container .student-info fieldset .input-group label.error {
+  color: #dc3545;
+}
+.form-wrapper .form-container .student-info fieldset .error-text {
+  color: #dc3545;
+  font-size: 13px;
+  display: block;
+  margin-top: 3px;
+  width: 100%;
+}
+.form-wrapper .form-container .submit-button, .form-wrapper .form-container .reset-button {
+  width: 100%;
+  height: 54px;
+  text-align: center;
+  margin-top: 20px;
+}

@@ -1,4 +1,5 @@
 import React from 'react';
+import './Field.css';
 
 const Field = ({field, fieldValue, validationMsg, onSetFieldValue}) => {
   const fieldOptions = {
