@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Field from './Field';
 import { v4 as uuid } from 'uuid';
 import './Form.css';
 
@@ -18,7 +19,7 @@ const Form = ({title, text, image, imageAlt, fields, onStudentCreated, studentTo
   // const [validateForm, setValidateForm] = useState(false);
   const [fieldsValues, setFieldsValues] = useState(fieldsDefaultValues);
 
-  const onSetFieldValue = (event, fieldType) => {
+  const onSetFieldValueHandler = (event, fieldType) => {
     let value = event.target.value;
 
     if (fieldType === 'checkbox') {
@@ -31,105 +32,6 @@ const Form = ({title, text, image, imageAlt, fields, onStudentCreated, studentTo
       return Object.assign({}, prevState);
     });
   };
-
-  const renderField = field => {
-    const fieldValue = fieldsValues[`${field.id}`].value;
-
-    const fieldOptions = {
-      name: field.id, 
-      id: field.id,
-      type: field.type,
-      value: fieldValue,
-      onChange: (event) => onSetFieldValue(event, field.type)
-    }
-    
-    if (field.params) {
-      Object.keys(field.params).forEach(key => {
-        fieldOptions[`${key}`] = field.params[key];
-      });
-    }
-
-    if (field.type === 'text' || field.type === 'number' || field.type === 'tel' || field.type === 'email') {
-      return (
-        <div key={field.id} className="input-group">
-          <label htmlFor={field.id}>{field.title}</label>
-          {React.createElement('input', fieldOptions)}
-          {/* {validateForm && fieldValue.length < 3 && (
-            <span className="error-text">This field is required</span>
-          )} */}
-        </div>
-      );
-    }
-
-    if (field.type === 'range') {
-      return (
-        <div key={field.id} className="input-group">
-          <label htmlFor={field.id}>{field.title}</label>
-          <div className="input-range">
-            {React.createElement('input', fieldOptions)}
-            <output>{fieldValue}</output>
-          </div>
-        </div>
-      );
-    }
-
-    if (field.type === 'radio') {
-      return (
-        <fieldset key={field.id}>
-          <legend>{field.title}</legend>
-
-          {field.values.map((value, index) => {
-            let radioId = field.id + '-' + index;
-            let isChecked = value === fieldValue;
-
-            return (
-              <div key={radioId} className="input-group">
-                <input 
-                  name={field.id} 
-                  id={radioId}
-                  type={field.type}
-                  value={value}
-                  checked={isChecked}
-                  onChange={event => {onSetFieldValue(event, field.type)}}
-                />
-                <label htmlFor={radioId}>{value}</label>
-              </div>
-            )
-          })}
-        </fieldset>      
-      );
-    }
-
-    if (field.type === 'checkbox') {
-      return (
-        <fieldset key={field.id}>
-          <legend>{field.title}</legend>
-
-          {field.values.map((value, index) => {
-            let checkboxId = field.id + '-' + index;
-            let isChecked = false;
-            if (fieldValue) {
-              isChecked = fieldValue.filter(item => item === value).length > 0;
-            }
-            
-            return (
-              <div key={checkboxId} className="input-group">
-                <input 
-                  name={field.id} 
-                  id={checkboxId}
-                  type={field.type}
-                  value={value}
-                  checked={isChecked}
-                  onChange={event => {onSetFieldValue(event, field.type)}}
-                />
-                <label htmlFor={checkboxId}>{value}</label>
-              </div>
-            )
-          })}
-        </fieldset>      
-      );
-    }   
-  }
 
   const onSubmitFormHandler = event => {
     event.preventDefault();
@@ -179,7 +81,7 @@ const Form = ({title, text, image, imageAlt, fields, onStudentCreated, studentTo
     
           <form id="students-form" onSubmit={onSubmitFormHandler} onReset={onResetFormHandler} noValidate>
             <div className="student-info">
-              {fields.map(field => renderField(field))}
+              {fields.map(field => <Field field={field} fieldValue={fieldsValues[`${field.id}`].value} onSetFieldValue={onSetFieldValueHandler} />)}
             </div>
             <button className="submit-button btn big-btn" type="submit">Save</button>
             <button className="reset-button btn secondary-btn big-btn" type="reset">Reset</button>
