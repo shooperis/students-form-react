@@ -22,13 +22,19 @@ const Form = ({title, text, image, imageAlt, fields, onStudentCreated, studentTo
   const onSetFieldValueHandler = (event, fieldType) => {
     let value = event.target.value;
 
-    if (fieldType === 'checkbox') {
-      const checkedCheckboxes = Array.from(document.querySelectorAll(`[name="${event.target.name}"]:checked`));
-      value = checkedCheckboxes.map(element => element.value);
-    }
-
     setFieldsValues(prevState => {
-      prevState[event.target.name].value = value;
+      if (fieldType === 'checkbox') {
+        let storedItems = [...prevState[event.target.name].value];
+
+        if (storedItems.includes(value)) {
+            prevState[event.target.name].value = storedItems.filter(item => item !== value);
+        } else {
+          prevState[event.target.name].value = [...storedItems, value];
+        }
+      } else {
+        prevState[event.target.name].value = value;
+      }
+
       return {...prevState};
     });
   };
